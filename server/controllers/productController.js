@@ -11,11 +11,28 @@ export const createProduct = asyncHandler(async (req, res) => {
 })
 
 export const allProduct = asyncHandler(async (req, res) => {
-    res.send("all product")
+    const data = await Product.find();
+
+    res.status(200).json({
+        message: "Berhasil menampilkan semua produk",
+        data
+    })
 })
 
 export const detailProduct = asyncHandler(async (req, res) => {
-    res.send("detail product")
+    const paramsId = req.params.id
+
+    const productData = await Product.findById(paramsId);
+
+    if (!productData) {
+        res.status(404)
+        throw new Error("Produk tidak ditemukan")
+    }
+
+    res.status(200).json({
+        message: "Detail produk berhasil ditampilkan",
+        data: productData
+    })
 })
 
 export const updateProduct = asyncHandler(async (req, res) => {
