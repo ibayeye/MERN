@@ -36,11 +36,34 @@ export const detailProduct = asyncHandler(async (req, res) => {
 })
 
 export const updateProduct = asyncHandler(async (req, res) => {
-    res.send("update product")
+    const paramsId = req.params.id
+
+    const updateProduct = await Product.findByIdAndUpdate(paramsId,
+        req.body, {
+            runValidators: false,
+            new: true
+        })
+
+        res.status(201).json({
+            message: "Update produk berhasil",
+            data: updateProduct
+        })
 })
 
 export const deleteProduct = asyncHandler(async (req, res) => {
-    res.send("delete product")
+    const paramsId = req.params.id
+    
+    const deleteProduct = await Product.findByIdAndDelete(paramsId)
+
+    // if (!deleteProduct) {
+    //     res.status(404)
+    //     throw new Error("Produk tidak ditemukan, Delete produk gagal")
+    // }
+
+    res.status(200).json({
+        message: "Delete produk berhasil",
+        data: deleteProduct
+    })
 })
 
 export const fileUpload = asyncHandler(async (req, res) => {

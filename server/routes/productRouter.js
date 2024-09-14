@@ -1,5 +1,5 @@
 import express from "express";
-import { protectedMiddleware } from "../middleware/authMiddleware.js";
+import { protectedMiddleware, adminMiddleware } from "../middleware/authMiddleware.js";
 import { createProduct, allProduct, detailProduct, updateProduct, deleteProduct, fileUpload } from "../controllers/productController.js";
 
 const router = express.Router();
@@ -10,7 +10,7 @@ const router = express.Router();
 // POST api/v1/product
 // Middleware owner
 
-router.post('/', createProduct)
+router.post('/', protectedMiddleware, adminMiddleware, createProduct)
 
 // READ PRODUCT
 // GET api/v1/product
@@ -25,12 +25,12 @@ router.get('/:id', detailProduct)
 // UPDATE PRODUCT
 // PUT api/v1/product/:id
 // Middleware owner
-router.put('/:id', updateProduct)
+router.put('/:id', protectedMiddleware, adminMiddleware, updateProduct)
 
 // DELETE PRODUCT
 // DELETE api/v1/product/:id
 // Middleware owner
-router.delete('/:id', deleteProduct)
+router.delete('/:id', protectedMiddleware, adminMiddleware, deleteProduct)
 
 // FILE UPLOAD PRODUCT
 // post api/v1/product/file-upload
