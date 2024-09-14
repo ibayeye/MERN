@@ -1,6 +1,7 @@
 import express from "express";
 import { protectedMiddleware, adminMiddleware } from "../middleware/authMiddleware.js";
 import { createProduct, allProduct, detailProduct, updateProduct, deleteProduct, fileUpload } from "../controllers/productController.js";
+import { upload } from "../utils/uploadFileHandler.js";
 
 const router = express.Router();
 
@@ -35,7 +36,7 @@ router.delete('/:id', protectedMiddleware, adminMiddleware, deleteProduct)
 // FILE UPLOAD PRODUCT
 // post api/v1/product/file-upload
 // Middleware owner
-router.post('/file-upload', fileUpload)
+router.post('/file-upload', protectedMiddleware, adminMiddleware, upload.single('image'), fileUpload)
 
 
 export default router;

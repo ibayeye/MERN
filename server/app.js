@@ -14,6 +14,7 @@ const port = 3000;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
+app.use(express.static('./public'))
 
 // endpoint
 app.use("/api/v1/auth", authRouter);
