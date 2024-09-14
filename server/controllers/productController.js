@@ -1,7 +1,13 @@
 import asyncHandler from "../middleware/asyncHandler.js"
+import Product from "../models/productModel.js"
 
 export const createProduct = asyncHandler(async (req, res) => {
-    res.send("create product")
+    const newProduct = await Product.create(req.body)
+
+    return res.status(201).json({
+        message: "Berhasil tambah produk",
+        data: newProduct
+    })
 })
 
 export const allProduct = asyncHandler(async (req, res) => {
