@@ -2,6 +2,7 @@ import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import authRouter from "./routes/authRouter.js";
+import productRouter from "./routes/productRouter.js"
 import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 import cookieParser from "cookie-parser";
 
@@ -16,6 +17,7 @@ app.use(cookieParser());
 
 // endpoint
 app.use("/api/v1/auth", authRouter);
+app.use("/api/v1/product", productRouter);
 
 // middleware error handling
 app.use(notFound);
