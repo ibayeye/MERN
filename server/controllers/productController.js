@@ -14,10 +14,18 @@ export const allProduct = asyncHandler(async (req, res) => {
 
     const queryObj = { ...req.query }
 
-    const excludeField = ["page", "limit"]
+    const excludeField = ["page", "limit", "name"]
     excludeField.forEach((element) => delete queryObj[element])
 
-    let query = Product.find(queryObj)
+    let query
+    if (req.query.name) {
+        query = Product.find({
+            name: { $regex: req.query.name, $options: 'i'}
+        })
+    } else {
+        query = Product.find(queryObj)
+    }
+
 
     // Pagination
     const page = req.query.page * 1 || 1
@@ -26,9 +34,10 @@ export const allProduct = asyncHandler(async (req, res) => {
 
     query = query.skip(skipData).limit(limitData)
 
+    let countProduct = await Product.countDocuments()
+
     if (req.query.page) {
-        const numProduct = await Product.countDocuments()
-        if (skipData >= numProduct) {
+        if (skipData >= countProduct) {
             res.status(404)
             throw new Error("Halaman tidak ditemukan")
         }
@@ -38,7 +47,8 @@ export const allProduct = asyncHandler(async (req, res) => {
 
     res.status(200).json({
         message: "Berhasil menampilkan semua produk",
-        data
+        data,
+        count: countProduct
     })
 })
 
