@@ -6,7 +6,7 @@ export const createOrder = asyncHandler(async (req, res) => {
 
     const {email, firstName, lastName, phone, cartItem} = req.body
 
-    if(!cartItem || cartItem.length < 0) {
+    if(!cartItem || cartItem.length < 1) {
         res.status(400)
         throw new Error ("Keranjang Masih Kosong")
     }
@@ -52,21 +52,30 @@ export const createOrder = asyncHandler(async (req, res) => {
 
 export const allOrder = asyncHandler(async (req, res) => {
 
+    const orders = await Order.find()
+
     return res.status(200).json({
+        data: orders,
         message: "Berhasil menampilkan semua order produk",
     })
 })
 
 export const detailOrder = asyncHandler(async (req, res) => {
 
+    const order = await Order.findById(req.params.id)
+
     return res.status(200).json({
+        data: order,
         message: "Berhasil menampilkan detail order produk",
     })
 })
 
 export const currentOrder = asyncHandler(async (req, res) => {
 
+    const orders = await Order.find({ 'user': req.user.id })
+
     return res.status(200).json({
+        data: orders,
         message: "Berhasil menampilkan current order produk",
     })
 })
