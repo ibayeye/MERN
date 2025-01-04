@@ -1,5 +1,7 @@
-import asyncHandler from "../middleware/asyncHandler.js"
-import Product from "../models/productModel.js"
+import asyncHandler from "../middleware/asyncHandler.js";
+import Product from "../models/productModel.js";
+import { v2 as cloudinary } from 'cloudinary';
+import streamifier from 'streamifier';
 
 export const createProduct = asyncHandler(async (req, res) => {
     const newProduct = await Product.create(req.body)
@@ -100,19 +102,22 @@ export const deleteProduct = asyncHandler(async (req, res) => {
 })
 
 export const fileUpload = asyncHandler(async (req, res) => {
-    const file = req.file;
-
-    if (!file) {
-        res.status(400)
-        throw new Error("Tidak ada file yang diupload")
-    }
-
-    const imageFileName = file.filename;
-
-    const pathImageFile = `/uploads/${imageFileName}`
-
-    res.status(200).json({
-        message: "Image berhasil diupload",
-        image: pathImageFile,
+    const stream = cloudinary.uploader.upload_stream({
+        folder: 'uploads',
+        allowed_formats: ['jpg', 'png', 'jpeg']
+    },
+    function(err, result){
+        if(err){
+            console.log(err)
+            return res.status(500).json({
+                message: 'Gagal upload gambar',
+                error: err
+            })
+        }
+        res.json({
+            message: 'Berhasil upload gambar',
+            url: result.secure_url
+        })
     })
+    streamifier.createReadStream(req.file.buffer).pipe(stream)
 })
