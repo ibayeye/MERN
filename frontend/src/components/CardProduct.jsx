@@ -1,0 +1,31 @@
+import React from "react";
+
+const CardProduct = ({ item }) => {
+  const priceFormat = (price) => {
+    const rupiahFormat = new Intl.NumberFormat("id-ID", {
+      style: "currency",
+      currency: "IDR",
+    }).format(price);
+    return rupiahFormat;
+  };
+  
+  return (
+    <>
+      <div className="card bg-base-300 shadow-xl" key={item._id}>
+        <figure>
+          <img src={item.image} alt="Product" />
+        </figure>
+        <div className="card-body">
+          <h2 className="card-title text-primary">{item.name}</h2>
+          <p className="font-bold text-accent">{priceFormat(item.price)}</p>
+          <p>{item.description.substring(0, 50)}</p>
+          <div className="card-actions justify-end">
+            <button className="btn btn-primary">Buy Now</button>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default CardProduct;
