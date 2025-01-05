@@ -8,7 +8,7 @@ const HomeView = () => {
 
   const getProducts = async () => {
     try {
-      const { data } = await customAPI.get("/product/?limit=3");
+      const { data } = await customAPI.get("/product?limit=3");
       setProducts(data.data);
       console.log(data.data);
     } catch (error) {

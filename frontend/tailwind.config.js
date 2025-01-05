@@ -13,7 +13,7 @@ export default {
   ],
   daisyui: {
     themes: [
-      "synthwave",
+      "corporate",
     ]
   }
 }
