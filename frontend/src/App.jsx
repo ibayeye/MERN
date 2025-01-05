@@ -14,6 +14,7 @@ import PublicLayout from "./layout/PublicLayout";
 import DetailProduct from "./page/DetailProduct";
 
 import { loader as HomeLoader } from "./page/HomeView"
+import { loader as ProductLoader } from "./page/ProductView"
 
 const router = createBrowserRouter([
   {
@@ -28,6 +29,7 @@ const router = createBrowserRouter([
       {
         path: "products",
         element: <ProductView/>,
+        loader: ProductLoader,
       },
       {
         path: "product/:id",
