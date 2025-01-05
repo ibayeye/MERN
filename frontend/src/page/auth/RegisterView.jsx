@@ -1,9 +1,12 @@
-const Register = () => {
-  return (
-    <div>
-      Register
-    </div>
-  )
-}
+import React from "react";
+import FormAuth from "../../components/FormAuth";
 
-export default Register
+const RegisterView = () => {
+  return (
+    <main>
+      <FormAuth isRegister={true} />
+    </main>
+  );
+};
+
+export default RegisterView;

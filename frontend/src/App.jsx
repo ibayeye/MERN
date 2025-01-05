@@ -16,6 +16,10 @@ import DetailProduct from "./page/DetailProduct";
 import { loader as HomeLoader } from "./page/HomeView"
 import { loader as ProductLoader } from "./page/ProductView"
 
+import { action as LoginAction } from "./page/auth/LoginView"
+
+import { store } from "./store";
+
 const router = createBrowserRouter([
   {
     path: '/',
@@ -51,7 +55,8 @@ const router = createBrowserRouter([
   },
   {
     path: "/login",
-    element: <LoginView/>
+    element: <LoginView/>,
+    action: LoginAction(store),
   },
   {
     path: "/register",
