@@ -20,7 +20,7 @@ const DetailProduct = () => {
 
   useEffect(() => {
     productData();
-  });
+  }, []);
   return (
     <section>
       <div className="card lg:card-side bg-base-100 shadow-xl">

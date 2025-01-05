@@ -13,6 +13,8 @@ import RegisterView from './page/auth/RegisterView'
 import PublicLayout from "./layout/PublicLayout";
 import DetailProduct from "./page/DetailProduct";
 
+import { loader as HomeLoader } from "./page/HomeView"
+
 const router = createBrowserRouter([
   {
     path: '/',
@@ -20,11 +22,12 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <HomeView/>
+        element: <HomeView/>,
+        loader: HomeLoader,
       },
       {
         path: "products",
-        element: <ProductView/>
+        element: <ProductView/>,
       },
       {
         path: "product/:id",
