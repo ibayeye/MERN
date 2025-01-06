@@ -16,12 +16,12 @@ const Hero = () => {
             Ratione, ad?
           </p>
           <div className="mt-10">
-            <Link to={"/products"} className="btn btn-primary">
-              Produk Kami
+            <Link to={"/products"} className="btn btn-primary text-lg">
+              Lihat lebih banyak
             </Link>
           </div>
         </div>
-        <div className="hidden lg:carousel carousel-center bg-neutral rounded-box space-x-4 p-4">
+        <div className="hidden lg:carousel carousel-center bg-neutral rounded-box space-x-4 p-4 h-[500px]">
           {products.map((item) => (
             <div className="carousel-item" key={item._id}>
               <img src={item.image} className="rounded-box" />

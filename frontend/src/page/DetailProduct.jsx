@@ -23,7 +23,7 @@ const DetailProduct = () => {
   }, []);
   return (
     <section>
-      <div className="card lg:card-side bg-base-100 shadow-xl">
+      <div className="card lg:card-side bg-base-300 shadow-xl">
         <figure>
           <img
             src={product.image}
@@ -32,13 +32,13 @@ const DetailProduct = () => {
           />
         </figure>
         <div className="card-body">
-          <h2 className="card-title">New movie is released!</h2>
-          <span className="text-3xl mt-3 text-accent font-bold">{priceFormat(product.price)}</span>
-          <span className="badge badge-primary">{product.category}</span>
-          <span className="mt-3 justify-end">{product.stock}</span>
-          <p className="mt-3">{product.description}</p>
-          <div className="card-actions justify-end">
-            <button className="btn btn-primary btn-lg">
+          <h2 className="card-title lg:text-6xl">{product.name}</h2>
+          <span className="lg:text-3xl mt-3 mb-3 text-accent font-bold">{priceFormat(product.price)}</span>
+          <span className="badge badge-primary rounded-lg text-base p-4">{product.category}</span>
+          <span className="mt-3 justify-end text-lg">Stock: {product.stock}</span>
+          <p className="mt-3 text-lg max-w-md">{product.description}</p>
+          <div className="card-actions justify-end mt-3">
+            <button className="btn btn-primary lg:btn-lg">
               <FaPlus /> Keranjang
             </button>
           </div>

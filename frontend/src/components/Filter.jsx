@@ -10,7 +10,7 @@ const Filter = () => {
   const categories = ["sepatu", "celana", "jaket"];
   return (
     <Form
-      method="get"
+      method="GET"
       className="bg-base-200 rounded-md px-8 py-4 grid gap-x-4 gap-y-3 grid-cols-2 items-center"
     >
       <FormInput

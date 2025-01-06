@@ -18,7 +18,7 @@ const FormAuth = ({ isRegister }) => {
         <FormInput label="email" type="email" name="email" />
         <FormInput label="password" type="password" name="password" />
         <div className="mt-4">
-          <button type="submit" className="btn btn-primary btn-block">
+          <button type="submit" className="btn btn-primary btn-block text-lg">
             {isRegister ? "Register" : "Login"}
           </button>
         </div>
