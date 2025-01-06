@@ -13,7 +13,7 @@ const FormAuth = ({ isRegister }) => {
           {isRegister ? "Register" : "Login"}
         </h4>
         {isRegister ? (
-          <FormInput label="name" type="name" name="username" />
+          <FormInput label="name" type="name" name="name" />
         ) : null}
         <FormInput label="email" type="email" name="email" />
         <FormInput label="password" type="password" name="password" />

@@ -22,10 +22,16 @@ const userSlice = createSlice({
       state.user = null
       localStorage.removeItem('user')
       toast.success("Logout Berhasil")
+    },
+    registerUser: (state, action) => {
+      const user = action.payload.data;
+      state.user = user
+      // set nilai dari local storage
+      localStorage.setItem('user', JSON.stringify(user));
     }
   },
 });
 
-export const { loginUsers, logoutUser } = userSlice.actions;
+export const { loginUsers, logoutUser, registerUser } = userSlice.actions;
 
 export default userSlice.reducer;
