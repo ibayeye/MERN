@@ -1,15 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { priceFormat } from "../utils";
 
 const CardProduct = ({ item }) => {
-  const priceFormat = (price) => {
-    const rupiahFormat = new Intl.NumberFormat("id-ID", {
-      style: "currency",
-      currency: "IDR",
-    }).format(price);
-    return rupiahFormat;
-  };
-
   return (
     <>
       <div className="card bg-base-300 shadow-xl" key={item._id}>
