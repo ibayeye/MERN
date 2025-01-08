@@ -3,18 +3,31 @@ import { useParams } from "react-router-dom";
 import customAPI from "../api";
 import { FaPlus } from "react-icons/fa6";
 import { generateSelectAmount, priceFormat } from "../utils";
+import { useDispatch } from "react-redux";
+import { addItem } from "../features/cartSlice";
 
 const DetailProduct = () => {
   let { id } = useParams();
   const [product, setProduct] = useState("");
   const [amount, setAmount] = useState(1);
-  const handleAmount = (e) => {
-    setAmount(parseInt(e.target.value))
-  }
 
-  const handleCard = () => {
-    console.log(amount)
-  }
+  const dispacth = useDispatch();
+  const handleAmount = (e) => {
+    setAmount(parseInt(e.target.value));
+  };
+
+  const productCart = {
+    cartId: product._id + product.name,
+    productId: product._id,
+    image: product.image,
+    name: product.name,
+    price: product.price,
+    amount,
+  };
+
+  const handleCart = () => {
+    dispacth(addItem({ product: productCart }));
+  };
   const productData = async () => {
     const { data } = await customAPI.get(`/product/${id}`);
     setProduct(data.data);
@@ -51,11 +64,18 @@ const DetailProduct = () => {
                 <label className="label">
                   <span className="capitalize label-text">Amount</span>
                 </label>
-                <select name="amount" className="select select-bordered" onChange={handleAmount}>
+                <select
+                  name="amount"
+                  className="select select-bordered"
+                  onChange={handleAmount}
+                >
                   {generateSelectAmount(product.stock)}
                 </select>
               </label>
-              <button className="btn btn-primary lg:btn-lg font-bold" onClick={handleCard}>
+              <button
+                className="btn btn-primary lg:btn-lg font-bold"
+                onClick={handleCart}
+              >
                 <FaPlus /> Keranjang
               </button>
             </div>

@@ -10,13 +10,14 @@ import { useNavigate } from "react-router-dom";
 
 const Nav = () => {
   const user = useSelector((state) => state.userState.user);
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
+  const countInCart = useSelector((state) => state.cartState.numItemsInCart);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const HandlingLogout = async () => {
     await customAPI.get("/auth/logout");
     dispatch(logoutUser());
     navigate("/login");
-  }
+  };
   return (
     <nav className="bg-base">
       <div className="navbar mx-auto max-w-6xl px-8 lg:h-20">
@@ -52,12 +53,17 @@ const Nav = () => {
             <div className="indicator">
               <BsCart3 className="h-6 w-6" />
               <span className="badge badge-primary badge-sm indicator-item">
-                8
+                {countInCart}
               </span>
             </div>
           </NavLink>
           {user && (
-            <button className="btn btn-error btn-outline btn-md" onClick={HandlingLogout}>Logout</button>
+            <button
+              className="btn btn-error btn-outline btn-md"
+              onClick={HandlingLogout}
+            >
+              Logout
+            </button>
           )}
         </div>
       </div>
