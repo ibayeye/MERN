@@ -22,6 +22,7 @@ const DetailProduct = () => {
     image: product.image,
     name: product.name,
     price: product.price,
+    stock: product.stock,
     amount,
   };
 
