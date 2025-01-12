@@ -6,15 +6,17 @@ import dotenv from "dotenv"
 
 dotenv.config()
 
+let snap = new midtransClient.Snap({
+    // Set to true if you want Production Environment (accept real transaction).
+    isProduction: false,
+    serverKey: process.env.SERVER_KEY
+});
+
 export const createOrder = asyncHandler(async (req, res) => {
 
     const { email, firstName, lastName, phone, cartItem } = req.body
 
-    let snap = new midtransClient.Snap({
-        // Set to true if you want Production Environment (accept real transaction).
-        isProduction: false,
-        serverKey: process.env.SERVER_KEY
-    });
+    
 
     if (!cartItem || cartItem.length < 1) {
         res.status(400)
@@ -153,6 +155,7 @@ export const callbackPayment = asyncHandler(async (req, res) => {
                 await productData.save()
             }
             orderData.status = "success"
+            await productData.save()
         }
     } else if (transactionStatus == 'cancel' ||
         transactionStatus == 'deny' ||
