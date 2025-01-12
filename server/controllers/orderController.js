@@ -119,7 +119,7 @@ export const currentOrder = asyncHandler(async (req, res) => {
 })
 
 export const callbackPayment = asyncHandler(async (req, res) => {
-    const statusResponse = apiClient.transaction.notification(req.body)
+    const statusResponse = await snap.transaction.notification(req.body)
 
     let orderId = statusResponse.order_id;
     let transactionStatus = statusResponse.transaction_status;
