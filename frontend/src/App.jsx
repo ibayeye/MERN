@@ -1,79 +1,82 @@
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-import AboutView from './page/AboutView'
-import CartView from './page/CartView'
-import HomeView from './page/HomeView'
-import OrderView from './page/OrderView'
-import ProductView from './page/ProductView'
-import LoginView from './page/auth/LoginView'
-import RegisterView from './page/auth/RegisterView'
+import AboutView from "./page/AboutView";
+import CartView from "./page/CartView";
+import HomeView from "./page/HomeView";
+import OrderView from "./page/OrderView";
+import ProductView from "./page/ProductView";
+import LoginView from "./page/auth/LoginView";
+import RegisterView from "./page/auth/RegisterView";
 import PublicLayout from "./layout/PublicLayout";
 import DetailProduct from "./page/DetailProduct";
 import Checkoutview from "./page/CheckoutView";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-import { loader as HomeLoader } from "./page/HomeView"
-import { loader as ProductLoader } from "./page/ProductView"
+import { loader as HomeLoader } from "./page/HomeView";
+import { loader as ProductLoader } from "./page/ProductView";
 
-import { action as LoginAction } from "./page/auth/LoginView"
-import { action as RegisterAction } from "./page/auth/RegisterView"
+import { action as LoginAction } from "./page/auth/LoginView";
+import { action as RegisterAction } from "./page/auth/RegisterView";
 
 import { store } from "./store";
 
 const router = createBrowserRouter([
   {
-    path: '/',
-    element: <PublicLayout/>,
+    path: "/",
+    element: <PublicLayout />,
     children: [
       {
         index: true,
-        element: <HomeView/>,
+        element: <HomeView />,
         loader: HomeLoader,
       },
       {
         path: "products",
-        element: <ProductView/>,
+        element: <ProductView />,
         loader: ProductLoader,
       },
       {
         path: "product/:id",
-        element: <DetailProduct/>
+        element: <DetailProduct />,
       },
       {
         path: "orders",
-        element: <OrderView/>
+        element: <OrderView />,
       },
       {
         path: "checkout",
-        element: <Checkoutview/>
+        element: <Checkoutview />,
       },
       {
         path: "cart",
-        element: <CartView/>
+        element: <CartView />,
       },
       {
         path: "about",
-        element: <AboutView/>
+        element: <AboutView />,
       },
     ],
   },
   {
     path: "/login",
-    element: <LoginView/>,
+    element: <LoginView />,
     action: LoginAction(store),
   },
   {
     path: "/register",
-    element: <RegisterView/>,
+    element: <RegisterView />,
     action: RegisterAction(store),
-  }
-])
-
+  },
+]);
 
 function App() {
-  return <RouterProvider router={router}/>
+  return (
+    <>
+      <RouterProvider router={router} />
+      <ToastContainer />
+    </>
+  );
 }
 
 export default App;

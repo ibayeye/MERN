@@ -9,17 +9,10 @@ import { logoutUser } from "../features/userSlice";
 import { useNavigate } from "react-router-dom";
 
 const Nav = () => {
-  const user = useSelector((state) => state.userState.user);
   const countInCart = useSelector((state) => state.cartState.numItemsInCart);
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const HandlingLogout = async () => {
-    await customAPI.get("/auth/logout");
-    dispatch(logoutUser());
-    navigate("/login");
-  };
+
   return (
-    <nav className="bg-base">
+    <nav className="bg-base-200">
       <div className="navbar mx-auto max-w-6xl px-8 lg:h-20">
         <div className="navbar-start">
           <NavLink
@@ -57,14 +50,6 @@ const Nav = () => {
               </span>
             </div>
           </NavLink>
-          {user && (
-            <button
-              className="btn btn-error btn-outline btn-md"
-              onClick={HandlingLogout}
-            >
-              Logout
-            </button>
-          )}
         </div>
       </div>
     </nav>

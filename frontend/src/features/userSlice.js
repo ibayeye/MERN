@@ -21,7 +21,6 @@ const userSlice = createSlice({
     logoutUser: (state) => {
       state.user = null
       localStorage.removeItem('user')
-      toast.success("Logout Berhasil")
     },
     registerUser: (state, action) => {
       const user = action.payload.data;

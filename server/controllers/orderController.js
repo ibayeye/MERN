@@ -33,7 +33,11 @@ export const createOrder = asyncHandler(async (req, res) => {
             res.status(404)
             throw new Error("id product tidak ditemukan")
         }
-        const { name, price, _id } = productData
+        const { name, price, _id, stock } = productData
+        if ( cart.quantity > stock) {
+            res.status(400)
+            throw new Error("Stok tidak mencukupi")
+        }
         const singleProduct = {
             quantity: cart.quantity,
             name,

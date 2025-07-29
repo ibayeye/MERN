@@ -21,12 +21,25 @@ const Hero = () => {
             </Link>
           </div>
         </div>
-        <div className="hidden lg:carousel carousel-center bg-neutral rounded-box space-x-4 p-4 h-[500px]">
-          {products.map((item) => (
-            <div className="carousel-item" key={item._id}>
-              <img src={item.image} className="rounded-box" />
-            </div>
-          ))}
+        <div>
+          <div className="hidden lg:carousel w-full max-w-xl space-x-4 rounded-box h-[350px]">
+            {products.map((item, index) => (
+              <div
+                id={`item${index}`}
+                className="carousel-item w-full"
+                key={item._id}
+              >
+                <img src={item.image} className="w-full object-cover" />
+              </div>
+            ))}
+          </div>
+          <div className="hidden lg:flex justify-center w-full py-2 gap-2">
+            {products.map((_, index) => (
+              <a href={`#item${index}`} key={index} className="btn btn-xs">
+                {index + 1}
+              </a>
+            ))}
+          </div>
         </div>
       </div>
     </>

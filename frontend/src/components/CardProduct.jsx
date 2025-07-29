@@ -5,7 +5,7 @@ import { priceFormat } from "../utils";
 const CardProduct = ({ item }) => {
   return (
     <>
-      <div className="card bg-base-300 shadow-xl" key={item._id}>
+      <div className="card bg-base-300 shadow-xl rounded-md" key={item._id}>
         <figure>
           <img src={item.image} alt={item.name} />
         </figure>
