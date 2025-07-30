@@ -4,13 +4,11 @@ import NavList from "./NavList";
 import { BsCart3 } from "react-icons/bs";
 import { FaBarsStaggered } from "react-icons/fa6";
 import { useSelector, useDispatch } from "react-redux";
-import customAPI from "../api";
-import { logoutUser } from "../features/userSlice";
-import { useNavigate } from "react-router-dom";
 
 const Nav = () => {
   const countInCart = useSelector((state) => state.cartState.numItemsInCart);
-
+  const user = useSelector((state) => state.userState.user);
+  const isAdmin = user?.role === "admin";
   return (
     <nav className="bg-base-200">
       <div className="navbar mx-auto max-w-6xl px-8 lg:h-20">
@@ -36,21 +34,26 @@ const Nav = () => {
           </div>
           {/*Tampilan PC*/}
           <div className="hidden lg:flex">
-            <ul className="menu menu-horizontal text-lg">
+            <ul className="menu menu-horizontal text-md">
               <NavList />
             </ul>
           </div>
         </div>
-        <div className="navbar-end">
-          <NavLink to="/cart" className="btn btn-ghost btn-circle btn-md mr-8">
-            <div className="indicator">
-              <BsCart3 className="h-6 w-6" />
-              <span className="badge badge-primary badge-sm indicator-item">
-                {countInCart}
-              </span>
-            </div>
-          </NavLink>
-        </div>
+        {!isAdmin && (
+          <div className="navbar-end">
+            <NavLink
+              to="/cart"
+              className="btn btn-ghost btn-circle btn-md mr-8"
+            >
+              <div className="indicator">
+                <BsCart3 className="h-6 w-6" />
+                <span className="badge badge-primary badge-sm indicator-item">
+                  {countInCart}
+                </span>
+              </div>
+            </NavLink>
+          </div>
+        )}
       </div>
     </nav>
   );

@@ -2,10 +2,9 @@ import React, { useEffect } from "react";
 import CartTotal from "../components/CartTotal";
 import FormInput from "../components/Form/FormInput";
 import { useSelector, useDispatch } from "react-redux";
-import { useState } from "react";
 import customAPI from "../api";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, redirect } from "react-router-dom";
 import { clearCart } from "../features/cartSlice";
 
 const insertSnapScript = () => {
@@ -19,6 +18,15 @@ const insertSnapScript = () => {
     script.onload = () => resolve();
     document.body.appendChild(script);
   });
+};
+
+export const loader = (storage) => () => {
+  const user = storage.getState().userState.user;
+  if (!user) {
+    toast.warn("Login untuk mengakses halaman ini!")
+    return redirect("/login");
+  }
+  return null;
 };
 const CheckoutView = () => {
   const user = useSelector((state) => state.userState.user);

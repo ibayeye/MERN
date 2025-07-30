@@ -12,9 +12,17 @@ import DetailProduct from "./page/DetailProduct";
 import Checkoutview from "./page/CheckoutView";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import ErrorView from "./page/ErrorView";
+import RequireRole from "./components/RequireRole";
+import UserLayout from "./layout/UserLayout";
+import AdminLayout from "./layout/AdminLayout";
+import ProductAdmin from "./page/admin/ProductAdmin";
+import DashboardAdmin from "./page/admin/Dashboard";
 
 import { loader as HomeLoader } from "./page/HomeView";
 import { loader as ProductLoader } from "./page/ProductView";
+import { loader as CheckoutLoader } from "./page/CheckoutView";
+import { loader as OrderLoader } from "./page/OrderView";
 
 import { action as LoginAction } from "./page/auth/LoginView";
 import { action as RegisterAction } from "./page/auth/RegisterView";
@@ -25,6 +33,7 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <PublicLayout />,
+    errorElement: <ErrorView />,
     children: [
       {
         index: true,
@@ -40,14 +49,16 @@ const router = createBrowserRouter([
         path: "product/:id",
         element: <DetailProduct />,
       },
-      {
-        path: "orders",
-        element: <OrderView />,
-      },
-      {
-        path: "checkout",
-        element: <Checkoutview />,
-      },
+      // {
+      //   path: "orders",
+      //   element: <OrderView />,
+      //   loader: OrderLoader(store),
+      // },
+      // {
+      //   path: "checkout",
+      //   element: <Checkoutview />,
+      //   loader: CheckoutLoader(store),
+      // },
       {
         path: "cart",
         element: <CartView />,
@@ -67,6 +78,49 @@ const router = createBrowserRouter([
     path: "/register",
     element: <RegisterView />,
     action: RegisterAction(store),
+  },
+  {
+    path: "/",
+    element: <RequireRole allowedRoles={["user"]} />,
+    children: [
+      {
+        path: "",
+        element: <UserLayout />,
+        children: [
+          {
+            path: "checkout",
+            element: <Checkoutview />,
+            loader: CheckoutLoader(store),
+          },
+          {
+            path: "orders",
+            element: <OrderView />,
+            loader: OrderLoader(store),
+          },
+        ],
+      },
+    ],
+  },
+  // Protected Admin Routes
+  {
+    path: "/admin",
+    element: <RequireRole allowedRoles={["admin"]} />,
+    children: [
+      {
+        path: "",
+        element: <AdminLayout />,
+        children: [
+          {
+            index: true,
+            element: <DashboardAdmin />,
+          },
+          {
+            path: "products",
+            element: <ProductAdmin />,
+          },
+        ],
+      },
+    ],
   },
 ]);
 

@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import customAPI from "../api";
 import { logoutUser } from "../features/userSlice";
+import { clearCart } from "../features/cartSlice";
 
 const Header = () => {
   const user = useSelector((state) => state.userState.user);
@@ -11,9 +12,15 @@ const Header = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const handleLogout = async () => {
-    await customAPI.get("/auth/logout");
-    dispatch(logoutUser());
-    navigate("/login");
+    try {
+      await customAPI.get("/auth/logout");
+      dispatch(logoutUser());
+      navigate("/login");
+    } catch (error) {
+      dispatch(logoutUser());
+      dispatch(clearCart());
+      navigate("/login");
+    }
   };
 
   return (

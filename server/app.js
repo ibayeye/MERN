@@ -7,6 +7,7 @@ import orderRouter from "./routes/orderRouter.js"
 import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 import cookieParser from "cookie-parser";
 import helmet from "helmet";
+import morgan from "morgan";
 import ExpressMongoSanitize from "express-mongo-sanitize";
 import { v2 as cloudinary } from 'cloudinary';
 
@@ -23,6 +24,7 @@ cloudinary.config({
 // middleware
 app.use(express.json());
 app.use(helmet());
+app.use(morgan("dev"));
 app.use(ExpressMongoSanitize());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());

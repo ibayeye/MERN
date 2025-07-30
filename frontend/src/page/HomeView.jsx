@@ -2,6 +2,8 @@ import customAPI from "../api";
 import CardProduct from "../components/CardProduct";
 import { useLoaderData } from "react-router-dom";
 import Hero from "../components/Hero";
+import { useSelector } from "react-redux";
+import Admin from "./admin/Dashboard";
 
 export const loader = async ({ request }) => {
   const { data } = await customAPI.get("/product?limit=3");
@@ -11,6 +13,7 @@ export const loader = async ({ request }) => {
 };
 const HomeView = () => {
   const { products } = useLoaderData();
+  const user = useSelector((state) => state.userState.user);
   return (
     <>
       <div>
