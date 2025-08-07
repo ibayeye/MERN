@@ -3,6 +3,7 @@ import { priceFormat } from "../utils";
 import customAPI from "../api";
 import NewPagination from "./NewPagination";
 import AddProductModal from "./Modals/AddProductModal";
+import EditProductModal from "./Modals/EditProductModal";
 
 const TableAdmin = () => {
   const [products, setProducts] = useState([]);
@@ -12,6 +13,8 @@ const TableAdmin = () => {
   });
   const [currentPage, setCurrentPage] = useState(1);
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState(null);
 
   const fetchProducts = useCallback(async (page = 1) => {
     try {
@@ -27,6 +30,10 @@ const TableAdmin = () => {
     fetchProducts(currentPage);
   }, [fetchProducts, currentPage]);
 
+  const handleEditProduct = (id) => {
+    setSelectedProduct(id);
+    setIsEditModalOpen(true);
+  };
   const handleDeleteProduct = async (id) => {
     try {
       await customAPI.delete(`/product/${id}`);
@@ -52,7 +59,7 @@ const TableAdmin = () => {
         onClose={() => setIsAddModalOpen(false)}
         onSuccess={() => fetchProducts(currentPage)}
       />
-      
+
       <div className="flex flex-col justify-center items-center gap-4">
         <div className="overflow-x-auto border border-base-content/5 bg-base-100">
           <table className="table table-xs table-pin-rows table-pin-cols">
@@ -86,7 +93,13 @@ const TableAdmin = () => {
                   </td>
                   <td>
                     <div className="flex gap-2">
-                      <button className="btn btn-warning">Edit</button>
+                      <button
+                        className="btn btn-warning"
+                        onClick={() => handleEditProduct(item._id)}
+                      >
+                        Edit
+                      </button>
+
                       <button
                         className="btn btn-error"
                         onClick={() => handleDeleteProduct(item._id)}
@@ -101,6 +114,12 @@ const TableAdmin = () => {
           </table>
         </div>
       </div>
+      <EditProductModal
+        isOpen={isEditModalOpen}
+        onClose={() => setIsEditModalOpen(false)}
+        onSuccess={() => fetchProducts(currentPage)}
+        productId={selectedProduct}
+      />
       <div className="flex justify-center items-center mt-2">
         <NewPagination
           currentPage={pagination.page}
