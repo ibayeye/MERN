@@ -34,7 +34,7 @@ const NavList = () => {
           color: isActive ? "white" : "inherit",
         })}
       >
-        <span className="text-lg">{link.icon} </span>
+        {link.icon && <span className="text-lg">{link.icon} </span>}
         <span>{link.text}</span>
       </NavLink>
     </li>

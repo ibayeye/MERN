@@ -66,7 +66,6 @@ const OrderView = () => {
                   <span className="btn btn-error">Failed</span>
                 )}
               </td>
-              <td>12/16/2020</td>
             </tr>
           ))}
         </tbody>
