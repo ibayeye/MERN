@@ -1,6 +1,6 @@
 import React from "react";
 
-const DashboardAdmin = () => {
+const DashboardView = () => {
   return (
     <div>
       <h1>Dashboard Admin</h1>
@@ -8,4 +8,4 @@ const DashboardAdmin = () => {
   );
 };
 
-export default DashboardAdmin;
+export default DashboardView;

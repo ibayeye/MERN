@@ -24,7 +24,7 @@ const Header = () => {
   };
 
   return (
-    <header className="bg-base-200 py-2 text-neutral-content">
+    <header className="bg-base-200 text-neutral-content">
       <div className="mx-auto max-w-6xl px-8 flex justify-center sm:justify-end">
         {user ? (
           <div className="relative">

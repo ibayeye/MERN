@@ -1,6 +1,6 @@
 import React from "react";
 
-const FormSelect = ({ label, name, list, defaultValue }) => {
+const FormSelect = ({ label, name, list = [], placeholder, value, defaultValue, onChange }) => {
   return (
     <div className="form-control">
       <label className="label">
@@ -9,12 +9,17 @@ const FormSelect = ({ label, name, list, defaultValue }) => {
       <select
         className="select select-bordered"
         name={name}
+        value={value}
         defaultValue={defaultValue}
+        onChange={onChange}
       >
-        {list.map((item) => {
+        <option value="" disabled hidden>
+          {placeholder || `Pilih ${label}`}
+        </option>
+        {list && list.map((item) => {
           return (
-            <option key={item} value={item}>
-              {item}
+            <option key={item.value} value={item.value}>
+              {item.label}
             </option>
           );
         })}

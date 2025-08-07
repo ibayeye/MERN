@@ -1,5 +1,4 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-
 import AboutView from "./page/AboutView";
 import CartView from "./page/CartView";
 import HomeView from "./page/HomeView";
@@ -16,8 +15,8 @@ import ErrorView from "./page/ErrorView";
 import RequireRole from "./components/RequireRole";
 import UserLayout from "./layout/UserLayout";
 import AdminLayout from "./layout/AdminLayout";
-import ProductAdmin from "./page/admin/ProductAdmin";
-import DashboardAdmin from "./page/admin/Dashboard";
+import ProductAdminView from "./page/admin/ProductAdminView";
+import DashboardView from "./page/admin/DashboardView";
 
 import { loader as HomeLoader } from "./page/HomeView";
 import { loader as ProductLoader } from "./page/ProductView";
@@ -112,11 +111,11 @@ const router = createBrowserRouter([
         children: [
           {
             index: true,
-            element: <DashboardAdmin />,
+            element: <DashboardView />,
           },
           {
             path: "products",
-            element: <ProductAdmin />,
+            element: <ProductAdminView />,
           },
         ],
       },

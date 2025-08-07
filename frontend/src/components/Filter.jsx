@@ -7,7 +7,12 @@ import { useLoaderData } from "react-router-dom";
 const Filter = () => {
   const { params } = useLoaderData();
   const { name, category } = params;
-  const categories = ["sepatu", "celana", "jaket"];
+  const categories = [
+    { value: "sepatu", label: "Sepatu" },
+    { value: "kameja", label: "Kameja" },
+    { value: "baju", label: "Baju" },
+    { value: "celana", label: "Celana" },
+  ];
   return (
     <Form
       method="GET"
@@ -17,6 +22,7 @@ const Filter = () => {
         label="Search Product"
         type="search"
         name="name"
+        // value={name}
         defaultValue={name}
       />
       <FormSelect

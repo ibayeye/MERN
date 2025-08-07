@@ -30,7 +30,7 @@ const Pagination = () => {
               pageNumber === page ? "bg-primary text-blue-900" : ""
             }`}
           >
-            1
+            {pageNumber}
           </button>
         );
       })}

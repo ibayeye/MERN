@@ -1,23 +1,22 @@
 import React from "react";
 
-const FormInput = ({ label, name, type, value, defaultValue, onChange, placeholder, style }) => {
+const FormInputImage = ({ label, name, value, onChange, placeholder }) => {
   return (
     <label className="form-control">
       <label className="label">
         <span className="label-text capitalize">{label}</span>
       </label>
       <input
-        className="input input-bordered"
-        type={type}
+      type="file"
+        accept="image/*"
+        className="file-input file-input-sm w-full"
         name={name}
         value={value}
-        defaultValue={defaultValue}
         onChange={onChange}
         placeholder={placeholder}
-        style={style}
-      ></input>
+      />
     </label>
   );
 };
 
-export default FormInput;
+export default FormInputImage;

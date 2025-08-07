@@ -1,6 +1,8 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
+import { RxDashboard } from "react-icons/rx";
+import { FiBox } from "react-icons/fi";
 
 const NavList = () => {
   const user = useSelector((state) => state.userState.user);
@@ -17,8 +19,8 @@ const NavList = () => {
   ];
 
   const adminLinks = [
-    { id: 5, url: "/admin", text: "dashboard" },
-    { id: 6, url: "/admin/products", text: "products" },
+    { id: 5, url: "/admin", text: "dashboard", icon: <RxDashboard /> },
+    { id: 6, url: "/admin/products", text: "product", icon: <FiBox /> },
   ];
 
   const renderNavLink = (link) => (
@@ -32,7 +34,8 @@ const NavList = () => {
           color: isActive ? "white" : "inherit",
         })}
       >
-        {link.text}
+        <span className="text-lg">{link.icon} </span>
+        <span>{link.text}</span>
       </NavLink>
     </li>
   );

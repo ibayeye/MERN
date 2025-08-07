@@ -1,23 +1,20 @@
 import React from "react";
 
-const FormInput = ({ label, name, type, value, defaultValue, onChange, placeholder, style }) => {
+const FormTextarea = ({ label, name, value, onChange, placeholder }) => {
   return (
     <label className="form-control">
       <label className="label">
         <span className="label-text capitalize">{label}</span>
       </label>
-      <input
-        className="input input-bordered"
-        type={type}
+      <textarea
+        className="textarea textarea-bordered w-full h-[180px]"
         name={name}
         value={value}
-        defaultValue={defaultValue}
         onChange={onChange}
         placeholder={placeholder}
-        style={style}
-      ></input>
+      />
     </label>
   );
 };
 
-export default FormInput;
+export default FormTextarea;
